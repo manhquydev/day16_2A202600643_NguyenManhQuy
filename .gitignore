@@ -1,11 +1,23 @@
 __pycache__/
 *.py[cod]
 *$py.class
+__pycache__/
+*.py[cod]
+*$py.class
 .venv/
 venv/
 ENV/
 env/
 .env
 .pytest_cache/
-outputs/
+outputs/**/*.jsonl
 .DS_Store
+
+# /flow run-state (generated; safe to ignore)
+MODE
+PROJECT_TYPE
+.flow/
+flow/
+cards/
+DESIGN.md
+RETRO.md

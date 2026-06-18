@@ -1,17 +1,17 @@
 from __future__ import annotations
 from typing import Literal, Optional, TypedDict
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, AliasChoices
 
 class ContextChunk(BaseModel):
     title: str
     text: str
 
 class QAExample(BaseModel):
-    qid: str
-    difficulty: Literal["easy", "medium", "hard"]
+    qid: str = Field(default_factory=lambda: "gen_qid")
+    difficulty: Literal["easy", "medium", "hard"] = "medium"
     question: str
-    gold_answer: str
-    context: list[ContextChunk]
+    gold_answer: str = Field(..., validation_alias=AliasChoices("gold_answer", "answer"))
+    context: list[ContextChunk] = Field(default_factory=list)
 
 class JudgeResult(BaseModel):
     score: int = Field(description="The evaluation score, 1 if correct, 0 if incorrect.")
